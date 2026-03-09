@@ -7,6 +7,7 @@ Life Boss Fight turns stressful incidents into guided, calm mission flows. This 
 - Tailwind CSS with shadcn-style UI primitives
 - Framer Motion for subtle motion
 - Firebase (Auth/Firestore/Storage) integration points
+- Local-first device evidence storage for photos/files, with Firebase upload left optional
 - Zod + React Hook Form for forms
 - Vitest + Testing Library + Playwright for tests
 
@@ -27,6 +28,8 @@ Life Boss Fight turns stressful incidents into guided, calm mission flows. This 
 
 ## Firebase setup
 Populate `.env.local` with Firebase web app credentials. If env vars are missing, app falls back to demo mode.
+
+Evidence attachments are stored on the user’s device by default for the MVP to keep remote storage costs low. Firebase Storage remains available as the future upload/sync path when you want multi-device access or cloud backups.
 
 ## Deployment (Vercel)
 - Import repository in Vercel.

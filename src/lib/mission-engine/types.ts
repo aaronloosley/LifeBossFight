@@ -51,6 +51,21 @@ export interface MissionRun {
   completedAt?: string;
   currentStepId: string;
   completedStepIds: string[];
+  stepStates: MissionStepState[];
+  metadata: {
+    templateSlug: string;
+    safeToPause: boolean;
+    lastUpdatedAt: string;
+  };
+}
+
+export interface MissionStepState {
+  id: string;
+  stepDefinitionId: string;
+  status: 'pending' | 'completed';
+  completedAt?: string;
+  notes?: string;
+  evidenceCount: number;
 }
 
 export interface EvidenceItem {
@@ -63,14 +78,44 @@ export interface EvidenceItem {
   createdAt: string;
   linkedStepId?: string;
   storagePath?: string;
+  storageUrl?: string;
+  attachmentName?: string;
   tags?: string[];
 }
 
 export interface TimelineEvent {
   id: string;
   missionRunId: string;
-  type: 'mission_started' | 'step_completed' | 'evidence_added' | 'contact_logged' | 'status_change';
+  type: 'mission_started' | 'step_completed' | 'evidence_added' | 'contact_logged' | 'status_change' | 'reminder_due';
   timestamp: string;
   title: string;
   detail: string;
+  actor?: string;
+}
+
+export interface Reminder {
+  id: string;
+  missionRunId: string;
+  relatedStepId: string;
+  dueAt: string;
+  status: 'pending' | 'done';
+  reminderType: 'follow-up';
+  title: string;
+  detail: string;
+}
+
+export interface MissionReport {
+  missionRunId: string;
+  generatedAt: string;
+  title: string;
+  summary: {
+    progressLabel: string;
+    evidenceCount: number;
+    contactCount: number;
+    timelineCount: number;
+    safeToPause: boolean;
+  };
+  nextActions: string[];
+  timeline: TimelineEvent[];
+  evidence: EvidenceItem[];
 }
