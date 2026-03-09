@@ -1,19 +1,27 @@
 'use client';
 
+import { missionTemplates } from '@/data/missions/templates';
+import { normalizeMissionRun } from '@/lib/mission-engine';
 import { EvidenceItem, MissionRun } from '@/lib/mission-engine/types';
 
 const RUNS_KEY = 'lbf_runs';
 const EVIDENCE_KEY = 'lbf_evidence';
+const SESSION_KEY = 'lbf_session';
 
 export const demoUser = {
   id: 'demo-user',
   name: 'Demo Operator',
-  email: 'demo@lifebossfight.app'
+  email: 'demo@lifebossfight.app',
+  photoUrl: ''
 };
 
 export function loadRuns(): MissionRun[] {
   if (typeof window === 'undefined') return [];
-  return JSON.parse(localStorage.getItem(RUNS_KEY) || '[]');
+  const rawRuns: MissionRun[] = JSON.parse(localStorage.getItem(RUNS_KEY) || '[]');
+  return rawRuns.map((run) => {
+    const template = missionTemplates.find((item) => item.id === run.templateId);
+    return template ? normalizeMissionRun(run, template) : run;
+  });
 }
 
 export function saveRun(run: MissionRun): void {
@@ -36,4 +44,16 @@ export function saveEvidence(item: EvidenceItem): void {
 export function resetDemo(): void {
   localStorage.removeItem(RUNS_KEY);
   localStorage.removeItem(EVIDENCE_KEY);
+  localStorage.removeItem(SESSION_KEY);
+}
+
+export function setSession(mode: 'demo' | 'google') {
+  if (typeof window === 'undefined') return;
+  localStorage.setItem(SESSION_KEY, mode);
+}
+
+export function loadSession(): 'demo' | 'google' | null {
+  if (typeof window === 'undefined') return null;
+  const session = localStorage.getItem(SESSION_KEY);
+  return session === 'demo' || session === 'google' ? session : null;
 }
