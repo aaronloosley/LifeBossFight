@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-bg text-slate-100;
+  font-family: Inter, ui-sans-serif, system-ui;
+}
+
+.shell {
+  @apply mx-auto w-full max-w-md px-4 pb-24 pt-4;
+}
+
+.glass {
+  @apply rounded-2xl border border-white/10 bg-slate-900/50 backdrop-blur;
+}
