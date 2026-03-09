@@ -1,0 +1,42 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="170" y1="68" x2="1012" y2="810" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B244A"/>
+      <stop offset="0.54" stop-color="#163B6F"/>
+      <stop offset="1" stop-color="#0C1D38"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(934 190) rotate(135) scale(320 180)">
+      <stop stop-color="#9AC8FF" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#9AC8FF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="pipe" x1="110" y1="410" x2="748" y2="410" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#10253F"/>
+      <stop offset="0.2" stop-color="#2E4E74"/>
+      <stop offset="0.48" stop-color="#89A6C3"/>
+      <stop offset="0.75" stop-color="#254466"/>
+      <stop offset="1" stop-color="#0E2036"/>
+    </linearGradient>
+    <filter id="drop" x="92" y="316" width="694" height="196" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#071224" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="900" rx="48" fill="url(#bg)"/>
+  <path d="M744 0H1200V476L1010 640L744 430V0Z" fill="url(#glow)"/>
+  <path d="M0 668L280 476L566 592L426 900H0V668Z" fill="#102A4D" fill-opacity="0.45"/>
+  <path d="M756 130L788 126L790 420H742L756 130Z" fill="url(#pipe)"/>
+  <g filter="url(#drop)">
+    <rect x="112" y="364" width="632" height="92" rx="46" fill="url(#pipe)"/>
+    <rect x="432" y="346" width="36" height="130" rx="18" fill="#C2D1E0"/>
+    <rect x="588" y="346" width="36" height="130" rx="18" fill="#C2D1E0"/>
+  </g>
+  <path d="M778 430C778 430 802 452 792 474C784 490 756 490 752 470C748 450 778 430 778 430Z" fill="#80C8FF"/>
+  <path d="M726 452C726 452 744 472 734 490C726 504 702 500 700 482C698 468 726 452 726 452Z" fill="#5DB7FF"/>
+  <path d="M684 434C684 434 712 458 704 484C698 502 662 504 654 484C644 456 684 434 684 434Z" fill="#9FE1FF"/>
+  <path d="M650 502C694 544 750 580 806 584C822 586 830 604 820 616C804 634 742 630 670 592C614 562 580 528 562 504C550 488 560 468 580 468C604 468 626 478 650 502Z" fill="#79CFFF"/>
+  <path d="M104 96H492" stroke="#7CB6FF" stroke-opacity="0.2" stroke-width="3" stroke-dasharray="8 12"/>
+  <path d="M792 760H1098" stroke="#7CB6FF" stroke-opacity="0.2" stroke-width="3" stroke-dasharray="8 12"/>
+  <text x="112" y="154" fill="#FFE29A" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="800">BURST PIPE</text>
+  <text x="112" y="212" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="600">Contain the leak. Capture the damage. Alert the right people.</text>
+  <rect x="112" y="250" width="256" height="52" rx="26" fill="#F97316"/>
+  <text x="158" y="284" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="800">HIGH THREAT</text>
+</svg>

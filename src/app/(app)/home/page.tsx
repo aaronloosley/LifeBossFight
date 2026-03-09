@@ -1,10 +1,12 @@
 'use client';
 
+import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { ArrowRight, Droplets, FolderOpen, ShieldEllipsis } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Button, buttonStyles } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { missionTemplates } from '@/data/missions/templates';
 import { getCurrentStep, getProgress } from '@/lib/mission-engine';
@@ -34,6 +36,14 @@ export default function HomePage() {
 
       <Card className="overflow-hidden p-0">
         <div className="space-y-3 bg-[linear-gradient(135deg,rgba(14,116,144,0.25),rgba(15,23,42,0.95))] p-4">
+          <Image
+            alt="Burst Pipe cover"
+            className="h-40 w-full rounded-2xl object-cover"
+            height={300}
+            priority
+            src="/burst-pipe-cover.svg"
+            width={600}
+          />
           <Badge className="bg-rose-500/15 text-rose-100">Quick start</Badge>
           <div className="flex items-start justify-between gap-4">
             <div>
@@ -42,8 +52,8 @@ export default function HomePage() {
             </div>
             <Droplets className="h-6 w-6 text-cyan-200" />
           </div>
-          <Link href="/missions/burst-pipe">
-            <Button>Start a new Boss Fight</Button>
+          <Link className={buttonStyles()} href="/missions/burst-pipe">
+            Start a new Boss Fight
           </Link>
         </div>
       </Card>
@@ -99,8 +109,8 @@ export default function HomePage() {
               {tmpl.category} · Threat {tmpl.threatLevel} · {tmpl.estimatedMinutes} min
             </p>
             {tmpl.status === 'live' ? (
-              <Link href={`/missions/${tmpl.slug}`}>
-                <Button>Start mission</Button>
+              <Link className={buttonStyles()} href={`/missions/${tmpl.slug}`}>
+                Start mission
               </Link>
             ) : (
               <Button disabled className="bg-slate-700">

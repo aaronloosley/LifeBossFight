@@ -1,10 +1,11 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { AlertTriangle, CheckCircle2, ChevronRight, FileText, ShieldCheck } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Button, buttonStyles } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { completeStep, getCurrentStep, getPhaseSteps, getProgress, getUpcomingReminders } from '@/lib/mission-engine';
@@ -34,6 +35,7 @@ export default function MissionRunPage() {
   return (
     <main className="shell space-y-4 pb-28">
       <Card className="space-y-3">
+        <Image alt={`${template.title} mission art`} className="h-32 w-full rounded-2xl object-cover" height={220} src="/burst-pipe-cover.svg" width={560} />
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-semibold">{template.title}</h1>
           <Badge>{progress.percentage}% complete</Badge>
@@ -78,8 +80,8 @@ export default function MissionRunPage() {
         <Card className="space-y-2">
           <h2 className="text-lg font-semibold">Mission complete</h2>
           <p>You’ve completed the critical first steps. Your report pack is ready.</p>
-          <Link href={`/runs/${run.id}/summary`}>
-            <Button>Open summary</Button>
+          <Link className={buttonStyles()} href={`/runs/${run.id}/summary`}>
+            Open summary
           </Link>
         </Card>
       )}

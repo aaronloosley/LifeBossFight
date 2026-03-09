@@ -1,29 +1,24 @@
 'use client';
 
 import { ArrowRight, Clock3, Droplets, ShieldAlert } from 'lucide-react';
-import { useRouter, useParams } from 'next/navigation';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { buttonStyles } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { createMissionRun, getMissionTemplate } from '@/lib/mission-engine';
-import { demoUser, saveRun } from '@/lib/store/demo-store';
+import { getMissionTemplate } from '@/lib/mission-engine';
 
 export default function MissionIntroPage() {
-  const router = useRouter();
   const params = useParams<{ slug: string }>();
   const template = getMissionTemplate(params.slug);
 
   if (!template) return <main className="shell">Mission not found.</main>;
 
-  const start = () => {
-    const run = createMissionRun(demoUser.id, template);
-    saveRun(run);
-    router.push(`/runs/${run.id}`);
-  };
-
   return (
     <main className="shell space-y-4 pb-28">
       <Card className="space-y-4 overflow-hidden bg-[linear-gradient(145deg,rgba(34,211,238,0.12),rgba(15,23,42,0.96))]">
+        <Image alt={`${template.title} cover`} className="h-52 w-full rounded-2xl object-cover" height={380} src="/burst-pipe-cover.svg" width={760} />
         <div className="flex items-center justify-between">
           <Badge>{template.missionType}</Badge>
           <Droplets className="h-5 w-5 text-cyan-200" />
@@ -67,7 +62,9 @@ export default function MissionIntroPage() {
           </div>
         </div>
 
-        <Button onClick={start}>Start mission</Button>
+        <Link className={buttonStyles()} href={`/launch/${template.slug}`}>
+          Start mission
+        </Link>
         <p className="text-xs text-slate-400">You do not need to solve everything at once. Start with the safest first step.</p>
       </Card>
 

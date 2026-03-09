@@ -2,8 +2,10 @@
 
 import { AlertTriangle, ArrowRight, ShieldCheck, Waves } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
+import { Button, buttonStyles } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { auth, googleProvider, hasFirebaseConfig } from '@/lib/firebase/config';
@@ -45,6 +47,7 @@ export default function LoginPage() {
         <div className="space-y-5 rounded-[1.75rem] bg-[radial-gradient(circle_at_top,_rgba(103,232,249,0.18),_transparent_35%),linear-gradient(180deg,rgba(8,23,50,0.95),rgba(10,17,30,0.98))] p-6">
           <div className="flex items-center justify-between">
             <div className="space-y-1">
+              <Image alt="Life Boss Fight wordmark" className="h-auto w-44" height={58} priority src="/lbf-wordmark.svg" width={176} />
               <p className="text-xs uppercase tracking-[0.3em] text-cyan-200">Life Boss Fight</p>
               <h1 className="text-3xl font-bold leading-tight">Turn chaos into calm, guided missions.</h1>
             </div>
@@ -77,9 +80,9 @@ export default function LoginPage() {
             </Button>
           </motion.div>
 
-          <Button className="bg-slate-700" onClick={() => continueToHome('demo')}>
+          <Link className={buttonStyles('bg-slate-700')} href="/demo">
             Try Demo
-          </Button>
+          </Link>
 
           <div className="rounded-2xl border border-white/10 bg-slate-950/50 p-4 text-sm text-slate-300">
             <p className="font-medium text-slate-100">Start fast</p>

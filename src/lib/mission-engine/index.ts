@@ -1,6 +1,8 @@
 import { missionTemplates } from '@/data/missions/templates';
 import { EvidenceItem, MissionReport, MissionRun, MissionStepState, MissionTemplate, Reminder, TimelineEvent } from './types';
 
+const MILLISECONDS_PER_MINUTE = 60_000;
+
 export function getMissionTemplate(slug: string): MissionTemplate | undefined {
   return missionTemplates.find((m) => m.slug === slug);
 }
@@ -34,7 +36,7 @@ export function createMissionRun(userId: string, template: MissionTemplate): Mis
 }
 
 export function normalizeMissionRun(run: MissionRun, template: MissionTemplate): MissionRun {
-  const stepStates =
+  const stepStates: MissionStepState[] =
     run.stepStates?.length > 0
       ? run.stepStates
       : template.stepDefinitions.map((step) => ({
@@ -117,7 +119,7 @@ export function getUpcomingReminders(run: MissionRun, template: MissionTemplate)
     const step = template.stepDefinitions.find((item) => item.id === state.stepDefinitionId);
     if (!step?.followUpMinutes) return [];
 
-    const dueAt = new Date(new Date(state.completedAt).getTime() + step.followUpMinutes * 60_000).toISOString();
+    const dueAt = new Date(new Date(state.completedAt).getTime() + step.followUpMinutes * MILLISECONDS_PER_MINUTE).toISOString();
     return [
       {
         id: `reminder-${state.stepDefinitionId}`,
@@ -202,18 +204,20 @@ export function buildTimeline(run: MissionRun, evidence: EvidenceItem[], templat
       ]
     : [];
 
+  const evidenceEvents: TimelineEvent[] = evidence.map((item) => ({
+    id: `ev-${item.id}`,
+    missionRunId: normalized.id,
+    type: item.type === 'contact' ? 'contact_logged' : 'evidence_added',
+    timestamp: item.createdAt,
+    title: item.type === 'contact' ? 'Contact logged' : 'Evidence secured',
+    detail: item.title,
+    actor: item.userId
+  }));
+
   return [
     ...base,
     ...stepEvents,
-    ...evidence.map((item) => ({
-      id: `ev-${item.id}`,
-      missionRunId: normalized.id,
-      type: item.type === 'contact' ? 'contact_logged' : 'evidence_added',
-      timestamp: item.createdAt,
-      title: item.type === 'contact' ? 'Contact logged' : 'Evidence secured',
-      detail: item.title,
-      actor: item.userId
-    })),
+    ...evidenceEvents,
     ...reminderEvents,
     ...statusEvents
   ].sort((a, b) => a.timestamp.localeCompare(b.timestamp));

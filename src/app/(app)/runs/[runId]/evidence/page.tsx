@@ -16,6 +16,8 @@ import { loadAttachmentFromDevice, saveAttachmentToDevice } from '@/lib/store/lo
 import { demoUser, loadEvidence, loadRuns, saveEvidence } from '@/lib/store/demo-store';
 import { useEffect, useMemo, useState } from 'react';
 
+const MAX_FILE_SIZE_BYTES = 3_000_000;
+
 export default function EvidencePage() {
   const params = useParams<{ runId: string }>();
   const [items, setItems] = useState(loadEvidence(params.runId));
@@ -139,7 +141,7 @@ export default function EvidencePage() {
                   return;
                 }
 
-                if (file.size > 3_000_000) {
+                if (file.size > MAX_FILE_SIZE_BYTES) {
                   setAttachmentName(undefined);
                   setSelectedFile(null);
                   setUploadError('Upload failed: choose a file under 3MB, then try again.');
