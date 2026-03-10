@@ -91,6 +91,11 @@ If you deploy without the Firebase variables, the app should still build and run
 ## Firestore collections (recommended)
 See `docs/firestore-schema.md` for scalable data model guidance matching users, mission templates, mission runs, evidence, timeline events, reminders, contacts, and reports.
 
+## Documentation
+- Firebase authentication integration guide: `docs/firebase-authentication-setup.md`
+- Production readiness backlog: `docs/tasks/README.md`
+- Mission roadmap shortlist: `docs/mission-roadmap.md`
+
 ## Architecture highlights
 - Mission templates are data-driven (`src/data/missions/templates.ts`).
 - Mission run logic is reusable (`src/lib/mission-engine/index.ts`).
