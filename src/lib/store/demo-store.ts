@@ -47,13 +47,13 @@ export function resetDemo(): void {
   localStorage.removeItem(SESSION_KEY);
 }
 
-export function setSession(mode: 'demo' | 'google') {
+export function setSession(mode: 'demo' | 'google' | 'email') {
   if (typeof window === 'undefined') return;
   localStorage.setItem(SESSION_KEY, mode);
 }
 
-export function loadSession(): 'demo' | 'google' | null {
+export function loadSession(): 'demo' | 'google' | 'email' | null {
   if (typeof window === 'undefined') return null;
   const session = localStorage.getItem(SESSION_KEY);
-  return session === 'demo' || session === 'google' ? session : null;
+  return session === 'demo' || session === 'google' || session === 'email' ? session : null;
 }
